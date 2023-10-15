@@ -4,11 +4,10 @@ import com.example.userservice.dtos.UserDto;
 import com.example.userservice.services.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/users/")
+//@RequestMapping("/users/")
 public class UserController {
     private final UserService userService;
 
@@ -16,8 +15,20 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
+
+    @PostMapping("/user/")
     public void createUser(@RequestBody UserDto user) {
         userService.createUser(user);
     }
+
+    @PostMapping("/login/")
+    public void login(@RequestBody UserDto user) throws Exception {
+        userService.login(user);
+    }
+
+
+//    @PostMapping("/logout/")
+//    public void logout() {
+//
+//    }
 }
