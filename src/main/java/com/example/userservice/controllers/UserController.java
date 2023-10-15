@@ -27,8 +27,8 @@ public class UserController {
     }
 
 
-//    @PostMapping("/logout/")
-//    public void logout() {
-//
-//    }
+    @PostMapping("/logout/")
+    public void logout(@RequestBody UserDto userDto) {
+        userService.logout(userDto);
+    }
 }

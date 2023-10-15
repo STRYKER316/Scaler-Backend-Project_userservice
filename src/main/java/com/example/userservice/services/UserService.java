@@ -6,6 +6,7 @@ import com.example.userservice.models.User;
 import com.example.userservice.repositories.SessionRepository;
 import com.example.userservice.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -54,5 +55,20 @@ public class UserService {
         }
 //        invalid user credentials
         throw new Exception("The user with provided credentials does not exist.");
+    }
+
+
+    @Transactional
+    public void logout(UserDto user) {
+        String userEmail = user.getEmail();
+        Optional<User> userFromDb = userRepository.findByEmail(userEmail);
+
+        if (userFromDb.isPresent()) {
+//            remove all the sessions for this user and log out
+            Long userId = userFromDb.get().getId();
+            sessionRepository.deleteAllByUserId(userId);
+
+            System.out.println("User logged out successfully.");
+        }
     }
 }

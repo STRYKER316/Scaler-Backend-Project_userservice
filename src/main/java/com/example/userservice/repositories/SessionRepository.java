@@ -7,6 +7,5 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
     @Override
     <S extends Session> S save(S entity);
 
-//    void deleteAllByUserEquals(Long userId);
-
+    void deleteAllByUserId(Long userId);
 }
